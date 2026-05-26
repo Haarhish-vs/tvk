@@ -7,6 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "jsEngine": "jsc",
+    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
@@ -27,17 +28,17 @@
       "backgroundColor": "#B10B0B"
     },
     "plugins": [
-  "expo-secure-store",
-  "expo-font",
-  [
-    "expo-build-properties",
-    {
-      "android": {
-        "newArchEnabled": false
-      }
-    }
-  ]
-],
+      "expo-secure-store",
+      "expo-font",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "newArchEnabled": true
+          }
+        }
+      ]
+    ],
     "extra": {
       "eas": {
         "projectId": "a053441a-a5b2-4531-b68d-90615cc5ed1d"
