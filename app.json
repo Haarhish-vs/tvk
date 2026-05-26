@@ -4,25 +4,44 @@
     "slug": "TVK",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Splashsc.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "jsEngine": "jsc",
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.tvk.grievance",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/Splashsc.png"
+        "foregroundImage": "./assets/icon.png"
       },
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/Splashsc.png"
+      "favicon": "./assets/icon.png"
+    },
+    "splash": {
+      "image": "./assets/Splashsc.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#B10B0B"
     },
     "plugins": [
-      "expo-secure-store",
-      "expo-font"
-    ]
+  "expo-secure-store",
+  "expo-font",
+  [
+    "expo-build-properties",
+    {
+      "android": {
+        "newArchEnabled": false
+      }
+    }
+  ]
+],
+    "extra": {
+      "eas": {
+        "projectId": "a053441a-a5b2-4531-b68d-90615cc5ed1d"
+      }
+    }
   }
 }
