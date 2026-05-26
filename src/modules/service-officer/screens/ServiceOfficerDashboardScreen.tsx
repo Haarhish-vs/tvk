@@ -1,16 +1,16 @@
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { fontFamily } from "../theme/fonts";
+import { fontFamily } from "../../../theme/fonts";
 
-type CitizenDashboardScreenProps = {
+type ServiceOfficerDashboardScreenProps = {
   phone?: string | null;
   onLogout: () => void;
 };
 
-export default function CitizenDashboardScreen({ phone, onLogout }: CitizenDashboardScreenProps) {
+export default function ServiceOfficerDashboardScreen({ phone, onLogout }: ServiceOfficerDashboardScreenProps) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <Text style={styles.title}>Citizen Dashboard</Text>
+        <Text style={styles.title}>Service Officer Dashboard</Text>
         {!!phone && <Text style={styles.subtitle}>+91 {phone}</Text>}
         <TouchableOpacity style={styles.logoutButton} onPress={onLogout}>
           <Text style={styles.logoutText}>Logout</Text>

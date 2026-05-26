@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { ApiError } from "../../../api/client/request";
+import { ApiError } from "../../services/request";
 import { sendRegistrationOtp } from "../services/authApi";
 import { SendOtpResponseData } from "../types/authTypes";
 import { normalizeIndianPhone, validateIndianPhone } from "../validations/phone";

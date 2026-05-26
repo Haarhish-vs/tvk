@@ -1,4 +1,4 @@
-import { postJson, putJson } from "../../../api/client/request";
+import { postJson, putJson } from "../../services/request";
 import {
   CompleteRegistrationRequest,
   CompleteRegistrationResponseData,

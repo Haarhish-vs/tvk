@@ -1,25 +1,24 @@
-import { Alert } from "react-native";
 import { useCallback, useEffect, useState } from "react";
 import * as Font from "expo-font";
-import OnboardingScreen from "../features/auth/screens/OnboardingScreen";
-import ConfirmPinScreen from "../features/auth/screens/ConfirmPinScreen";
-import OtpVerificationScreen from "../features/auth/screens/OtpVerificationScreen";
-import PhoneNumberScreen from "../features/auth/screens/PhoneNumberScreen";
-import PinLoginScreen from "../features/auth/screens/PinLoginScreen";
-import ProfileFillScreen from "../features/auth/screens/ProfileFillScreen";
-import SetPinScreen from "../features/auth/screens/SetPinScreen";
-import SplashScreen from "../features/auth/screens/SplashScreen";
-import CitizenDashboardScreen from "../screens/CitizenDashboardScreen";
-import MlaDashboardScreen from "../screens/MlaDashboardScreen";
-import ServiceOfficerDashboardScreen from "../screens/ServiceOfficerDashboardScreen";
-import WardCouncillorDashboardScreen from "../screens/WardCouncillorDashboardScreen";
+import OnboardingScreen from "../shared/auth/screens/OnboardingScreen";
+import ConfirmPinScreen from "../shared/auth/screens/ConfirmPinScreen";
+import OtpVerificationScreen from "../shared/auth/screens/OtpVerificationScreen";
+import PhoneNumberScreen from "../shared/auth/screens/PhoneNumberScreen";
+import PinLoginScreen from "../shared/auth/screens/PinLoginScreen";
+import ProfileFillScreen from "../shared/auth/screens/ProfileFillScreen";
+import SetPinScreen from "../shared/auth/screens/SetPinScreen";
+import SplashScreen from "../shared/auth/screens/SplashScreen";
+import CitizenDashboardScreen from "../modules/citizen/screens/CitizenDashboardScreen";
+import MlaDashboardScreen from "../modules/mla/screens/MlaDashboardScreen";
+import ServiceOfficerDashboardScreen from "../modules/service-officer/screens/ServiceOfficerDashboardScreen";
+import WardCouncillorDashboardScreen from "../modules/councillor/screens/WardCouncillorDashboardScreen";
 import {
   clearAuthSession,
   getAuthSession,
   getOnboardingCompleted,
   setAuthSession,
   setOnboardingCompleted,
-} from "../features/auth/utils/authStorage";
+} from "../shared/storage/authStorage";
 import { poppinsFonts } from "../theme/fonts";
 
 type AuthStep =

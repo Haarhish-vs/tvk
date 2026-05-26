@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { ApiError } from "../../../api/client/request";
+import { ApiError } from "../../services/request";
 import { sendRegistrationOtp, verifyRegistrationOtp } from "../services/authApi";
 import { VerifyOtpResponseData } from "../types/authTypes";
 import { validateOtp } from "../validations/otp";

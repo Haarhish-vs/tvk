@@ -10,19 +10,26 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { ApiError } from "../../../api/client/request";
-import { loginWithPin } from "../services/authApi";
-import { LoginWithPinResponseData } from "../types/authTypes";
+import { ApiError } from "../../services/request";
+import { completeRegistration } from "../services/authApi";
+import { CompleteRegistrationResponseData } from "../types/authTypes";
 import { fontFamily } from "../../../theme/fonts";
 
 const PIN_LENGTH = 4;
 
-type PinLoginScreenProps = {
-  phone: string;
-  onLoggedIn: (data: LoginWithPinResponseData) => void;
+type ConfirmPinScreenProps = {
+  registrationToken: string;
+  pin: string;
+  onCompleted: (data: CompleteRegistrationResponseData) => void;
+  onBack?: () => void;
 };
 
-export default function PinLoginScreen({ phone, onLoggedIn }: PinLoginScreenProps) {
+export default function ConfirmPinScreen({
+  registrationToken,
+  pin,
+  onCompleted,
+  onBack,
+}: ConfirmPinScreenProps) {
   const [digits, setDigits] = useState<string[]>(Array(PIN_LENGTH).fill(""));
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -64,12 +71,20 @@ export default function PinLoginScreen({ phone, onLoggedIn }: PinLoginScreenProp
       return;
     }
 
+    if (pinValue !== pin) {
+      setErrorMessage("PINs do not match");
+      return;
+    }
+
     setIsSubmitting(true);
     setErrorMessage(null);
 
     try {
-      const response = await loginWithPin({ phone, pin: pinValue });
-      onLoggedIn(response.data);
+      const response = await completeRegistration({
+        registrationToken,
+        pin: pinValue,
+      });
+      onCompleted(response.data);
     } catch (error) {
       if (error instanceof ApiError) {
         setErrorMessage(error.message);
@@ -79,7 +94,7 @@ export default function PinLoginScreen({ phone, onLoggedIn }: PinLoginScreenProp
     } finally {
       setIsSubmitting(false);
     }
-  }, [isComplete, onLoggedIn, phone, pinValue]);
+  }, [isComplete, onCompleted, pin, pinValue, registrationToken]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -88,7 +103,14 @@ export default function PinLoginScreen({ phone, onLoggedIn }: PinLoginScreenProp
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
         <View style={styles.headerRow}>
-          <Text style={styles.brand}>Namma Sulur</Text>
+          <View style={styles.headerLeft}>
+            {!!onBack && (
+              <TouchableOpacity onPress={onBack} style={styles.backButton}>
+                <Text style={styles.backIcon}>{"<"}</Text>
+              </TouchableOpacity>
+            )}
+            <Text style={styles.brand}>Namma Sulur</Text>
+          </View>
           <View style={styles.langToggle}>
             <View style={[styles.langChip, styles.langChipActive]}>
               <Text style={[styles.langText, styles.langTextActive]}>ENG</Text>
@@ -100,7 +122,9 @@ export default function PinLoginScreen({ phone, onLoggedIn }: PinLoginScreenProp
         </View>
 
         <Text style={styles.title}>Verify Your Security PIN</Text>
-        <Text style={styles.subtitle}>Enter your 4-digit PIN to continue.</Text>
+        <Text style={styles.subtitle}>
+          Create a 4-digit PIN to secure your account and log in quickly next time.
+        </Text>
 
         <View style={styles.pinRow}>
           {digits.map((digit, index) => (
@@ -122,8 +146,6 @@ export default function PinLoginScreen({ phone, onLoggedIn }: PinLoginScreenProp
             />
           ))}
         </View>
-
-        <Text style={styles.phoneText}>+91 {phone}</Text>
 
         {!!errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
 
@@ -158,6 +180,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  headerLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  backButton: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: "#F4F4F4",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 8,
+  },
+  backIcon: {
+    color: "#111827",
+    fontSize: 16,
+    fontFamily: fontFamily.medium,
   },
   brand: {
     color: "#C20B0B",
@@ -211,12 +251,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: fontFamily.semiBold,
     color: "#0E0E10",
-  },
-  phoneText: {
-    marginTop: 16,
-    fontSize: 12,
-    fontFamily: fontFamily.medium,
-    color: "#6B7280",
   },
   errorText: {
     marginTop: 12,

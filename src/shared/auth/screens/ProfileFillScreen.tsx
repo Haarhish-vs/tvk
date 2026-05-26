@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { ApiError } from "../../../api/client/request";
+import { ApiError } from "../../services/request";
 import { updateProfile } from "../services/authApi";
 import { ProfileUpdateResponseData } from "../types/authTypes";
 import { fontFamily } from "../../../theme/fonts";
