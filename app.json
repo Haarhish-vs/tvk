@@ -4,7 +4,7 @@
     "slug": "TVK",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/Splashsc.png",
     "userInterfaceStyle": "light",
     "jsEngine": "jsc",
     "ios": {
@@ -13,12 +13,12 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/adaptive-icon.png"
+        "foregroundImage": "./assets/Splashsc.png"
       },
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/Splashsc.png"
     },
     "plugins": [
       "expo-secure-store",
